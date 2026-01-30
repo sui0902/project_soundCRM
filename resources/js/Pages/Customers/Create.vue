@@ -21,8 +21,8 @@ const form = reactive({
   memo: null
 })
 
-const storeItem = () => {
-  Inertia.post('/items', form)
+const storeCustomer = () => {
+  Inertia.post('/customers', form)
 }
 
 
@@ -43,7 +43,7 @@ const storeItem = () => {
                     <div class="p-6 text-gray-900">
                       
                       <section class="text-gray-600 body-font relative">
-                        <form action="" @submit.prevent="storeItem">
+                        <form action="" @submit.prevent="storeCustomer">
                           <div class="container px-5 py-8 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                               <div class="flex flex-wrap -m-2">
@@ -58,42 +58,42 @@ const storeItem = () => {
                                   <div class="relative">
                                     <label for="kana" class="leading-7 text-sm text-gray-600">顧客名カナ</label>
                                     <input type="text" id="kana" name="kana" v-model="form.kana" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError :message="errors.name"/>
+                                    <InputError :message="errors.kana"/>
                                   </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="tel" class="leading-7 text-sm text-gray-600">電話番号</label>
                                     <input type="tel" id="tel" name="tel" v-model="form.tel" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError :message="errors.name"/>
+                                    <InputError :message="errors.tel"/>
                                   </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
                                     <input type="email" id="email" name="email" v-model="form.email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError :message="errors.name"/>
+                                    <InputError :message="errors.email"/>
                                   </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="postcode" class="leading-7 text-sm text-gray-600">郵便番号</label>
                                     <input type="number" id="postcode" name="postcode" v-model="form.postcode" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError :message="errors.name"/>
+                                    <InputError :message="errors.postcode"/>
                                   </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="address" class="leading-7 text-sm text-gray-600">住所</label>
                                     <input type="text" id="address" name="address" v-model="form.address" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError :message="errors.name"/>
+                                    <InputError :message="errors.address"/>
                                   </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
                                     <label for="birthday" class="leading-7 text-sm text-gray-600">誕生日</label>
                                     <input type="date" id="birthday" name="birthday" v-model="form.birthday" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <InputError :message="errors.name"/>
+                                    <InputError :message="errors.birthday"/>
                                   </div>
                                 </div>
                                 <div class="p-2 w-full">
@@ -112,6 +112,7 @@ const storeItem = () => {
                                         <label for="gender" class="ml-3 text-sm font-medium text-gray-700">その他</label>
                                       </div>
                                     </div>
+                                    <InputError :message="errors.gender" class="mt-4"/>
                                 </div>
                                 
                                 <div class="p-2 w-full">
