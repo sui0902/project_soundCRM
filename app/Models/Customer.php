@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
+    public function scopeSearchCustomers($query, $input = null)
+    {
+        if(!empty($input)){
+            return $query->where('kana', 'like', '%' . $input . '%' )
+                ->orWhere('tel', 'like', '%' . $input . '%')
+                ->orWhere('name', 'like', '%' . $input . '%');
+        }
+        return $query;
+    }
 }

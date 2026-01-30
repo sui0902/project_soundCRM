@@ -1,12 +1,20 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head , Link } from '@inertiajs/vue3';
-import FlashMessage from '@/Components/FlashMessage.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { Head , Link } from '@inertiajs/vue3'
+import FlashMessage from '@/Components/FlashMessage.vue'
 import Pagination from '@/Components/Pagination.vue'
+import { ref } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 
 defineProps({
     customers: Object
 })
+
+const search = ref('')
+
+const searchCustomers = () => {
+    Inertia.get(route('customers.index', { search: search.value }))
+}
 
 </script>
 
@@ -26,6 +34,10 @@ defineProps({
                             <div class="container px-5 py-8 mx-auto">
                                 <div class="lg:w-2/3 w-full mx-auto">
                                     <FlashMessage />
+                                </div>
+                                <div class="lg:w-2/3 w-full mx-auto">
+                                    <input type="text" name="search" v-model="search" class="bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-400 focus:bg-white focus:ring-2 focus:ring-cyan-400 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <button class="bg-cyan-500 text-white py-2 px-2 ml-4 rounded border" @click="searchCustomers">検索</button>
                                 </div>
                                 <div class="flex pl-4 my-4 lg:w-2/3 w-full mx-auto">
                                     <Link as="button" :href="route('customers.create')" class="flex ml-auto text-white bg-cyan-300 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-500 rounded">顧客登録</Link>
