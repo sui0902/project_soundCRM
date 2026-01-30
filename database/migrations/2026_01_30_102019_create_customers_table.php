@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('kana');
+            $table->string('tel')->unique();
+            $table->string('email');
+            $table->string('postcode');
+            $table->string('address');
+            $table->date('birthday')->nulable();
+            $table->tinyInteger('gender'); // 0男性, 1女性、2その他
+            $table->text('memo')->nulable();
             $table->timestamps();
         });
     }
