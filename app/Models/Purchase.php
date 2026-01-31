@@ -11,7 +11,7 @@ class Purchase extends Model
 {
     use HasFactory;
 
-    protected $filable = [
+    protected $fillable = [
         'customer_id',
         'status',
     ];
