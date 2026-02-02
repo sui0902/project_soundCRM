@@ -5,9 +5,10 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import InputError from '@/Components/InputError.vue';
 import { getToday } from '@/common';
+import MicroModal from '@/Components/MicroModal.vue';
 
 const props = defineProps({
-  'customers': Array,
+  // 'customers': Array,
   'items': Array,
   errors: Object
 })
@@ -54,7 +55,9 @@ const storePurchase = () => {
   Inertia.post(route('purchases.store'), form )
 }
 
-
+const setCustomerId = id => {
+  form.customer_id = id
+}
 
 </script>
 
@@ -85,12 +88,8 @@ const storePurchase = () => {
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
-                                    <label for="customer" class="leading-7 text-sm text-gray-600">会員名</label>
-                                    <select name="customer" v-model="form.customer_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                      <option v-for="customer in customers" :value="customer.id" :key="customer.id">
-                                        {{ customer.id }} : {{ customer.name }}
-                                      </option>
-                                    </select>
+                                    <label class="leading-7 text-sm text-gray-600">会員名</label>
+                                      <MicroModal @update:customerId="setCustomerId" />
                                     <InputError :message="errors.name"/>
                                   </div>
                                 </div>
@@ -121,13 +120,11 @@ const storePurchase = () => {
                                     </table>
                                 </div>
                                 <div class="p-2 w-full">
-                                  <div class="relative">
-                                    <label for="price" class="leading-7 text-sm text-gray-600">合計金額</label>
+                                    <label class="leading-7 text-sm text-gray-600">合計金額</label>
                                     <div class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                       {{ totalPrice }}円
                                     </div>
                                     <InputError :message="errors.price"/>
-                                  </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <button class="flex mx-auto text-white bg-cyan-300 border-0 py-2 px-8 focus:outline-none hover:bg-cyan-500 rounded text-lg">購入する</button>
