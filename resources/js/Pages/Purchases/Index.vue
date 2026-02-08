@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-import { Head } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3'
 import FlashMessage from '@/Components/FlashMessage.vue'
 import Pagination from '@/Components/Pagination.vue'
 import dayjs from 'dayjs'
@@ -50,7 +50,11 @@ onMounted(() => {
                                         </thead>
                                         <tbody>
                                             <tr v-for="order in props.orders.data" :key="order.id">
-                                                <td class="border-t-2 border-gray-200 px-4 py-3">{{ order.id }}</td>
+                                                <td class="border-t-2 border-gray-200 px-4 py-3">
+                                                  <Link class="text-blue-400" :href="route('purchases.show', { purchase: order.id })">
+                                                    {{ order.id }}
+                                                  </Link>
+                                                </td>
                                                 <td class="border-t-2 border-gray-200 px-4 py-3">{{ order.customer_name }}</td>
                                                 <td class="border-t-2 border-gray-200 px-4 py-3">{{ order.total }}</td>
                                                 <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">{{ order.status }}</td>

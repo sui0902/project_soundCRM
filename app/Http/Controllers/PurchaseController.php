@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $orders = Order::groupBy('id')
@@ -68,15 +63,20 @@ class PurchaseController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Purchase  $purchase
-     * @return \Illuminate\Http\Response
-     */
     public function show(Purchase $purchase)
     {
-        //
+        //小計
+        $items = Order::where('id', $purchase->id)->get();
+        //合計
+        $order = Order::groupBy('id')
+        ->where('id', $purchase->id)
+        ->selectRaw('id, sum(subtotal) as total, customer_name, status, created_at')
+        ->get();
+
+        return Inertia::render('Purchases/Show', [
+            'items' => $items,
+            'order' => $order,
+        ]);
     }
 
     /**
